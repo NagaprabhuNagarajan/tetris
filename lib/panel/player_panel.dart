@@ -27,7 +27,7 @@ class PlayerPanel extends StatelessWidget {
     return SizedBox.fromSize(
       size: size,
       child: Container(
-        padding: EdgeInsets.all(2),
+        padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black),
         ),
@@ -68,7 +68,7 @@ class _GameUninitialized extends StatelessWidget {
       return Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
+          children: const <Widget>[
             IconDragon(animate: true),
             SizedBox(height: 16),
             Text(

@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
-
 import 'material.dart';
 
 const _DIGITAL_ROW_SIZE = Size(14, 24);
@@ -16,7 +14,7 @@ class Number extends StatelessWidget {
 
   final bool padWithZero;
 
-  Number({
+  const Number({
     Key? key,
     this.length = 5,
     required this.number,
@@ -48,7 +46,7 @@ class IconDragon extends StatefulWidget {
 
   @override
   _IconDragonState createState() {
-    return new _IconDragonState();
+    return _IconDragonState();
   }
 }
 
@@ -177,7 +175,7 @@ class Digital extends StatelessWidget {
 
   final Size size;
 
-  Digital(this.digital, {Key? key, this.size = const Size(10, 17)})
+  const Digital(this.digital, {Key? key, this.size = const Size(10, 17)})
       : assert((digital <= 9 && digital >= 0)),
         super(key: key);
 

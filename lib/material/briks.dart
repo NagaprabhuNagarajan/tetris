@@ -22,8 +22,8 @@ class BrikSize extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(BrikSize old) {
-    return old.size != size;
+  bool updateShouldNotify(BrikSize oldWidget) {
+    return oldWidget.size != size;
   }
 }
 

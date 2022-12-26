@@ -1,6 +1,8 @@
 part of 'page_portrait.dart';
 
 class PageLand extends StatelessWidget {
+  const PageLand({super.key});
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -16,12 +18,12 @@ class PageLand extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Spacer(),
                     SystemButtonGroup(),
                     Spacer(),
                     Padding(
-                      padding: const EdgeInsets.only(left: 40, bottom: 40),
+                      padding: EdgeInsets.only(left: 40, bottom: 40),
                       child: DropButton(),
                     )
                   ],
@@ -30,7 +32,7 @@ class PageLand extends StatelessWidget {
               _ScreenDecoration(child: Screen.fromHeight(height * 0.8)),
               Expanded(
                 child: Column(
-                  children: <Widget>[
+                  children: const <Widget>[
                     Spacer(),
                     DirectionController(),
                     SizedBox(height: 30),
