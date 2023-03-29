@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names, library_private_types_in_public_api
 import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -236,7 +237,7 @@ class _MaterialPainter extends CustomPainter {
 
   _MaterialPainter(this.offset, this.size, this.material);
 
-  Paint _paint = Paint();
+  final Paint _paint = Paint();
 
   @override
   void paint(Canvas canvas, Size size) {

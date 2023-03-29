@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:tetris/material/briks.dart';
 import 'package:tetris/material/images.dart';
@@ -72,7 +73,7 @@ class _GameUninitialized extends StatelessWidget {
             IconDragon(animate: true),
             SizedBox(height: 16),
             Text(
-              "tetrix",
+              "Tetrix",
               style: TextStyle(fontSize: 20),
             ),
           ],

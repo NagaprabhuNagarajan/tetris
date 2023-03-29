@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names
 import 'gamer.dart';
 import 'dart:math' as math;
 
@@ -105,11 +106,11 @@ class Block {
       }
     }
     final nextXy = [
-      this.xy[0] + ORIGIN[type]![rotateIndex][0],
-      this.xy[1] + ORIGIN[type]![rotateIndex][1]
+      xy[0] + ORIGIN[type]![rotateIndex][0],
+      xy[1] + ORIGIN[type]![rotateIndex][1]
     ];
     final nextRotateIndex =
-        rotateIndex + 1 >= ORIGIN[this.type]!.length ? 0 : rotateIndex + 1;
+        rotateIndex + 1 >= ORIGIN[type]!.length ? 0 : rotateIndex + 1;
 
     return Block(type, result, nextXy, nextRotateIndex);
   }

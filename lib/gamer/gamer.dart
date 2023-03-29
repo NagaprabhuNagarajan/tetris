@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tetris/gamer/block.dart';
@@ -56,19 +57,19 @@ class Game extends StatefulWidget {
 }
 
 ///duration for show a line when reset
-const _REST_LINE_DURATION = const Duration(milliseconds: 50);
+const _REST_LINE_DURATION = Duration(milliseconds: 50);
 
 const _LEVEL_MAX = 6;
 
 const _LEVEL_MIN = 1;
 
 const _SPEED = [
-  const Duration(milliseconds: 800),
-  const Duration(milliseconds: 650),
-  const Duration(milliseconds: 500),
-  const Duration(milliseconds: 370),
-  const Duration(milliseconds: 250),
-  const Duration(milliseconds: 160),
+  Duration(milliseconds: 800),
+  Duration(milliseconds: 650),
+  Duration(milliseconds: 500),
+  Duration(milliseconds: 370),
+  Duration(milliseconds: 250),
+  Duration(milliseconds: 160),
 ];
 
 class GameControl extends State<Game> with RouteAware {
@@ -228,20 +229,21 @@ class GameControl extends State<Game> with RouteAware {
 
       ///消除效果动画
       for (int count = 0; count < 5; count++) {
-        clearLines.forEach((line) {
+        for (var line in clearLines) {
           _mask[line].fillRange(0, GAME_PAD_MATRIX_W, count % 2 == 0 ? -1 : 1);
-        });
+        }
         setState(() {});
-        await Future.delayed(Duration(milliseconds: 100));
+        await Future.delayed(const Duration(milliseconds: 100));
       }
-      clearLines
-          .forEach((line) => _mask[line].fillRange(0, GAME_PAD_MATRIX_W, 0));
+      for (var line in clearLines) {
+        _mask[line].fillRange(0, GAME_PAD_MATRIX_W, 0);
+      }
 
       //移除所有被消除的行
-      clearLines.forEach((line) {
+      for (var line in clearLines) {
         _data.setRange(1, line + 1, _data);
         _data[0] = List.filled(GAME_PAD_MATRIX_W, 0);
-      });
+      }
       debugPrint("clear lines : $clearLines");
 
       _cleared += clearLines.length;
@@ -276,7 +278,7 @@ class GameControl extends State<Game> with RouteAware {
   ///遍历表格
   ///i 为 row
   ///j 为 column
-  static void _forTable(dynamic function(int row, int column)) {
+  static void _forTable(dynamic Function(int row, int column) function) {
     for (int i = 0; i < GAME_PAD_MATRIX_H; i++) {
       for (int j = 0; j < GAME_PAD_MATRIX_W; j++) {
         final b = function(i, j);
@@ -394,7 +396,7 @@ class GameControl extends State<Game> with RouteAware {
 }
 
 class GameState extends InheritedWidget {
-  GameState(
+  const GameState(
     this.data,
     this.states,
     this.level,

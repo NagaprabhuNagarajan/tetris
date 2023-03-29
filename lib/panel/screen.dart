@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names, library_private_types_in_public_api
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:tetris/gamer/gamer.dart';
@@ -41,7 +42,7 @@ class Screen extends StatelessWidget {
                   PlayerPanel(width: playerPanelWidth),
                   SizedBox(
                     width: width - playerPanelWidth,
-                    child: StatusPanel(),
+                    child: const StatusPanel(),
                   )
                 ],
               ),
@@ -75,11 +76,11 @@ class _ShakeState extends State<Shake> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 150))
-          ..addListener(() {
-            setState(() {});
-          });
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 150))
+      ..addListener(() {
+        setState(() {});
+      });
     super.initState();
   }
 

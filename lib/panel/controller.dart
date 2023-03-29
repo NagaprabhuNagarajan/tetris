@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names
 import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
@@ -21,9 +22,9 @@ class GameController extends StatelessWidget {
   }
 }
 
-const Size _DIRECTION_BUTTON_SIZE = const Size(48, 48);
+const Size _DIRECTION_BUTTON_SIZE = Size(48, 48);
 
-const Size _SYSTEM_BUTTON_SIZE = const Size(28, 28);
+const Size _SYSTEM_BUTTON_SIZE = Size(28, 28);
 
 const double _DIRECTION_SPACE = 16;
 
@@ -273,26 +274,26 @@ class _Description extends StatelessWidget {
         break;
       case AxisDirection.left:
         widget = Row(
-          children: <Widget>[Text(text), SizedBox(width: 8), child],
           mainAxisSize: MainAxisSize.min,
+          children: <Widget>[Text(text), const SizedBox(width: 8), child],
         );
         break;
       case AxisDirection.up:
         widget = Column(
-          children: <Widget>[Text(text), SizedBox(height: 8), child],
           mainAxisSize: MainAxisSize.min,
+          children: <Widget>[Text(text), const SizedBox(height: 8), child],
         );
         break;
       case AxisDirection.down:
         widget = Column(
-          children: <Widget>[child, SizedBox(height: 8), Text(text)],
           mainAxisSize: MainAxisSize.min,
+          children: <Widget>[child, const SizedBox(height: 8), Text(text)],
         );
         break;
     }
     return DefaultTextStyle(
+      style: const TextStyle(fontSize: 12, color: Colors.black),
       child: widget,
-      style: TextStyle(fontSize: 12, color: Colors.black),
     );
   }
 }
