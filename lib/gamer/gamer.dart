@@ -13,29 +13,18 @@ const GAME_PAD_MATRIX_W = 10;
 
 ///state of [GameControl]
 enum GameStates {
-  ///随时可以开启一把惊险而又刺激的俄罗斯方块
   none,
 
-  ///游戏暂停中，方块的下落将会停止
   paused,
 
-  ///游戏正在进行中，方块正在下落
-  ///按键可交互
   running,
 
-  ///游戏正在重置
-  ///重置完成之后，[GameController]状态将会迁移为[none]
   reset,
 
-  ///下落方块已经到达底部，此时正在将方块固定在游戏矩阵中
-  ///固定完成之后，将会立即开始下一个方块的下落任务
   mixing,
 
-  ///正在消除行
-  ///消除完成之后，将会立刻开始下一个方块的下落任务
   clear,
 
-  ///方块快速下坠到底部
   drop,
 }
 
@@ -102,12 +91,6 @@ class GameControl extends State<Game> with RouteAware {
   ///the gamer data
   final List<List<int>> _data = [];
 
-  ///在 [build] 方法中于 [_data]混合，形成一个新的矩阵
-  ///[_mask]矩阵的宽高与 [_data] 一致
-  ///对于任意的 _mask[x,y] ：
-  /// 如果值为 0,则对 [_data]没有任何影响
-  /// 如果值为 -1,则表示 [_data] 中该行不显示
-  /// 如果值为 1，则表示 [_data] 中该行高亮
   final List<List<int>> _mask = [];
 
   ///from 1-6
@@ -214,7 +197,6 @@ class GameControl extends State<Game> with RouteAware {
 
     _forTable((i, j) => _data[i][j] = _current?.get(j, i) ?? _data[i][j]);
 
-    //消除行
     final clearLines = [];
     for (int i = 0; i < GAME_PAD_MATRIX_H; i++) {
       if (_data[i].every((d) => d == 1)) {
@@ -227,7 +209,6 @@ class GameControl extends State<Game> with RouteAware {
 
       _sound.clear();
 
-      ///消除效果动画
       for (int count = 0; count < 5; count++) {
         for (var line in clearLines) {
           _mask[line].fillRange(0, GAME_PAD_MATRIX_W, count % 2 == 0 ? -1 : 1);
@@ -239,7 +220,6 @@ class GameControl extends State<Game> with RouteAware {
         _mask[line].fillRange(0, GAME_PAD_MATRIX_W, 0);
       }
 
-      //移除所有被消除的行
       for (var line in clearLines) {
         _data.setRange(1, line + 1, _data);
         _data[0] = List.filled(GAME_PAD_MATRIX_W, 0);
@@ -262,22 +242,18 @@ class GameControl extends State<Game> with RouteAware {
       setState(() {});
     }
 
-    //_current已经融入_data了，所以不再需要
     _current = null;
 
-    //检查游戏是否结束,即检查第一行是否有元素为1
     if (_data[0].contains(1)) {
       reset();
       return;
     } else {
-      //游戏尚未结束，开启下一轮方块下落
       _startGame();
     }
   }
 
-  ///遍历表格
-  ///i 为 row
-  ///j 为 column
+  ///i - row
+  ///j - column
   static void _forTable(dynamic Function(int row, int column) function) {
     for (int i = 0; i < GAME_PAD_MATRIX_H; i++) {
       for (int j = 0; j < GAME_PAD_MATRIX_W; j++) {
@@ -319,7 +295,6 @@ class GameControl extends State<Game> with RouteAware {
 
   void reset() {
     if (_states == GameStates.none) {
-      //可以开始游戏
       _startGame();
       return;
     }
@@ -410,10 +385,6 @@ class GameState extends InheritedWidget {
 
   final Widget child;
 
-  ///屏幕展示数据
-  ///0: 空砖块
-  ///1: 普通砖块
-  ///2: 高亮砖块
   final List<List<int>> data;
 
   final GameStates states;

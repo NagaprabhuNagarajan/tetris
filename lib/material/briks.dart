@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, use_key_in_widget_constructors
 import 'package:flutter/material.dart';
 
 const _COLOR_NORMAL = Colors.black87;
